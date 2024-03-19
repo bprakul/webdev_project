@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Profile</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <style>
+        body {
+          background-color: #01161e;
+        }
+  
+        .boxes {
+          background-color: white;
+        }
+  
+        .myBtns {
+          background-color: #eff6e0;
+          color: #01161e;
+          font-weight: bolder;
+          font-size: 17px;
+        }
+  
+        .myBtns:hover {
+          background-color: #598392;
+        }
+  
+        .myBtns:disabled {
+          background-color: #aec3b0;
+        }
+  
+        label {
+          color: #eff6e0;
+          font-weight: bolder;
+          font-size: 17px;
+        }
+      </style>
+
+      <script>  
+        function doShowPic(refFile, refImg) {
+          const [file] = refFile.files;
+          if (file) {
+            refImg.src = URL.createObjectURL(file);
+          }
+        }
+
+        $(document).ready(function() {
+          $("#searchBtn").click(function() {
+            sbtn.disabled = false;
+            ubtn.disabled = false;
+            let obj = {
+              url:"/searchProv",
+              data: {
+                mail:$("#txtMail").val()
+              }
+            }
+  
+            $.ajax(obj).done(function(ary) {
+              $("#txtName").val(ary[0].name);
+              $("#txtMob").val(ary[0].contact);
+              $("#txtGen").val(ary[0].gender);
+              $("#txtReq").val(ary[0].category);
+              $("#txtFirm").val(ary[0].firm);
+              $("#txtWeb").val(ary[0].website);
+              $("#txtAdd").val(ary[0].location);
+              $("#txtDate").val(ary[0].since);
+              $("#txtSpec").val(ary[0].otherinfo);
+              $("#preview").prop("src","Uploads/"+ary[0].proofpic);
+
+              $("#hdn").val(ary[0].proofpic);
+            }).fail(function(err) {
+              alert(err.message);
+            })
+          }) 
+          
+        })
+      </script>
+</head>
+<body>
+    
+    <center>
+        <br>
+        <div>
+          <h1 style="color: #eff6e0">Service Provider Profile</h1>
+        </div>
+      </center>
+      <div class="container">
+        <div class="container">
+          <div class="container">
+            <form class="" id="profForm" action="/provProf-save" method="post" enctype="multipart/form-data">
+              <input type="hidden" id="hdn" name="hdn">
+              <div class="row g-5">
+                <div class="col-md-10">
+                  <label for="txtMail" class="form-label">Email</label>
+                  <input type="email" class="form-control boxes" id="txtMail" name="ntxtMail" required/>
+                </div>
+                <div class="col-md-2">
+                  <label for="searchBtn" class="form-label">&nbsp;</label>
+                  <input
+                    type="button"
+                    class="btn myBtns form-control"
+                    value="Search"
+                    id="searchBtn"
+                  />
+                </div>
+              </div>
+  
+              <br />
+              <div class="row g-5">
+                <div class="col-md-4">
+                  <label for="txtName" class="form-label">Name</label>
+                  <input type="text" class="form-control boxes" id="txtName" name="ntxtName" required/>
+                </div>
+                <div class="col-md-4">
+                  <label for="txtMob" class="form-label">Contact Number</label>
+                  <input type="text" class="form-control boxes" id="txtMob" name="ntxtMob" required/>
+                </div>
+                <div class="col-md-2">
+                    <label for="txtGen" class="form-label">Gender</label>
+                    <input type="text" class="form-control boxes" id="txtGen" name="ntxtGen" required/>
+                </div>
+              </div>
+
+              <br>
+              <div class="row g-5">
+                <div class="col-md-3">
+                    <label for="txtReq" class="form-label">Type of Work</label>
+                    <select id="txtReq" name="ntxtReq" class="form-control">
+                      <option value="none">Choose...</option>
+                      <option value="Plumber">Plumber</option>
+                      <option value="Electrician">Electrician</option>
+                      <option value="Carpenter">Carpenter</option>
+                      <option value="Mechanic">Mechanic</option>
+                      <option value="Interior">Interior</option>
+                      <option value="Gardener">Gardener</option>
+                      <option value="Labourer">Labourer</option>
+                      <option value="Welder">Welder</option>
+                      <option value="Maid">Maid</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="txtFirm" class="form-label">Firm(If-Any)</label>
+                    <input type="text" class="form-control" id="txtFirm" name="ntxtFirm" value="None" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="txtWeb" class="form-label">Website(If-Any)</label>
+                    <input type="text" class="form-control" id="txtWeb" name="ntxtWeb" value="None" required>
+                </div>
+              </div>
+  
+              <br />
+              <div class="row g-5">
+                <div class="col-md-7">
+                    <label for="txtAdd" class="form-label">Location/Firm Address</label>
+                    <input type="text" class="form-control boxes" id="txtAdd" name="ntxtAdd"required/>
+                </div>
+                <div class="col-md-3">
+                    <label for="txtDate" class="form-label">Since</label>
+                    <input type="date" class="form-control boxes" id="txtDate" name="ntxtDate" required/>
+                </div>  
+               </div>
+  
+              <br /><br>
+              <div class="row g-5">
+                <div class="col-md-5">
+                  <label for="ppic" class="form-label">ID Proof</label>
+                  <input
+                    type="file"
+                    id="ppic"
+                    name="nppic"
+                    class="form-control boxes"
+                    required
+                    onchange="doShowPic(this,preview)"
+                  />
+                </div>
+                <div class="col-md-2">
+                  <img
+                    src=""
+                    id="preview"
+                    height="150"
+                    width="100px"
+                    class="form-control boxes"
+                  />
+                </div>
+              </div>
+  
+              <div class="row g-5">
+              <div class="col-md-10">
+                <label for="txtSpec" class="form-label">Specialization/Other Info/Previous Work</label>
+                <textarea name="ntxtSpec" id="txtSpec" cols="137" rows="5" class="form-control" required></textarea>
+              </div>
+            </div>
+              <br />
+              <center>
+                <button
+                  type="submit"
+                  class="btn myBtns"
+                  id="sbtn"
+                  style="margin-right: 20px"
+                >
+                  Upload Data
+                </button>
+                <button
+                  type="submit"
+                  class="btn myBtns"
+                  id="ubtn"
+                  formaction="/provProf-update"
+                >
+                  Edit my Info
+                </button>
+              </center>
+            </form>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
+
+
+
+
