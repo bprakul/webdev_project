@@ -248,6 +248,11 @@ app.get("/change-pass",function(req,resp) {
     })
 })
 
+app.get("/provDash",function(req,resp) {
+    let filePath = process.cwd()+"/Public/provider-dash.html";
+    resp.sendFile(filePath);
+})
+
 app.get("/provProf",function(req,resp) {
     let filePath = process.cwd()+"/Public/profile-provider.html";
     resp.sendFile(filePath);

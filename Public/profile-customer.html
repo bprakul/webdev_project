@@ -20,32 +20,53 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <style>
       body {
-        background-color: #01161e;
+        background-image: url("Images/profbg2.jpg");
+        background-size: cover;
+        background-attachment: fixed;
       }
 
       .boxes {
         background-color: white;
-      } 
+      }
 
       .myBtns {
-        background-color: #eff6e0;
-        color: #01161e;
+        background-color: #25293a;
+        color: #c8e1ec;
         font-weight: bolder;
         font-size: 17px;
+      }
+
+      #proflab {
+        color: #c8e1ec;
+        /* width: 208px; */
+        /* height: 30px; */
       }
 
       .myBtns:hover {
-        background-color: #598392;
+        background-color: #c8e1ec;
+        color: #25293a;
+        #proflab {
+          color: #25293a;
+        }
       }
 
       .myBtns:disabled {
-        background-color: #aec3b0;
+        background-color: #25293a;
+        color: #c8e1ec;
+      }
+
+      .myBtns:active {
+        background-color: #25293a;
+        color: #c8e1ec;
+        #proflab {
+          color: #c8e1ec;
+        }
       }
 
       label {
-        color: #eff6e0;
+        color: #25293a;
         font-weight: bolder;
-        font-size: 17px;
+        font-size: 20px;
       }
     </style>
 
@@ -76,7 +97,8 @@
             },
           };
 
-          $.ajax(obj).done(function (ary) {
+          $.ajax(obj)
+            .done(function (ary) {
               $("#txtName").val(ary[0].name);
               $("#txtMob").val(ary[0].contact);
               $("#txtAdd").val(ary[0].address);
@@ -90,30 +112,46 @@
               alert(err.message);
             });
         });
-        
       });
     </script>
   </head>
   <body>
     <br />
-    <center>
-      <div>
-        <h1 style="color: #eff6e0">Customer Profile</h1>
+    <div class="d-flex" style="justify-content: center; flex-direction: column">
+      <div class="d-flex" style="justify-content: center">
+        <h1 style="color: #25293a; font-weight: bold">Profile</h1>
       </div>
-    </center>
-    <div class="container">
-      <div class="container">
-        <div class="container">
+
+      <div class="d-flex" style="justify-content: center">
+        <div style="width: 230px; height: 30%">
+          <img
+            src="Images/user.png"
+            id="preview"
+            height="200vw"
+            class="form-control boxes"
+            style="border-radius: 50%"
+          />
+        </div>
+      </div>
+      <br />
+      <div
+        class="d-flex"
+        style="justify-content: space-around; flex-wrap: wrap"
+      >
+        <div class="col-md-7" style="background-color: #46585f71">
           <form
-            class=""
+            class="col-12"
             id="profForm"
             action="/custProf-save"
             method="post"
             enctype="multipart/form-data"
           >
             <input type="hidden" id="hdn" name="hdn" />
-            <div class="row g-5">
-              <div class="col-md-10">
+            <div
+              class="d-flex"
+              style="justify-content: space-around; flex-wrap: wrap"
+            >
+              <div class="col-6">
                 <label for="txtMail" class="form-label">Email</label>
                 <input
                   type="email"
@@ -123,7 +161,7 @@
                   required
                 />
               </div>
-              <div class="col-md-2">
+              <div class="col-2">
                 <label for="searchBtn" class="form-label">&nbsp;</label>
                 <input
                   type="button"
@@ -132,11 +170,34 @@
                   id="searchBtn"
                 />
               </div>
+              <div class="col-3">
+                <label for="ppic" class="form-label">&nbsp;</label>
+                <button
+                  type="button"
+                  for="ppic"
+                  class="myBtns form-control"
+                  id="profbutton"
+                  style="border: 0px; height: 38px"
+                >
+                  <label class="" for="ppic" id="proflab">Picture</label>
+                  <input
+                    type="file"
+                    id="ppic"
+                    name="nppic"
+                    class="form-control"
+                    onchange="doShowPic(this,preview)"
+                    style="display: none"
+                  />
+                </button>
+              </div>
             </div>
 
             <br />
-            <div class="row g-5">
-              <div class="col-md-5">
+            <div
+              class="d-flex"
+              style="justify-content: space-around; flex-wrap: wrap"
+            >
+              <div class="col-6">
                 <label for="txtName" class="form-label">Name</label>
                 <input
                   type="text"
@@ -146,7 +207,7 @@
                   required
                 />
               </div>
-              <div class="col-md-5">
+              <div class="col-5">
                 <label for="txtMob" class="form-label">Contact Number</label>
                 <input
                   type="text"
@@ -159,20 +220,28 @@
             </div>
 
             <br />
-            <div class="col-10">
-              <label for="txtAdd" class="form-label">Address</label>
-              <input
-                type="text"
-                class="form-control boxes"
-                id="txtAdd"
-                name="ntxtAdd"
-                required
-              />
+            <div
+              class="d-flex"
+              style="margin-left: 18px; flex-wrap: wrap"
+            >
+              <div class="col-11">
+                <label for="txtAdd" class="form-label">Address</label>
+                <input
+                  type="text"
+                  class="form-control boxes"
+                  id="txtAdd"
+                  name="ntxtAdd"
+                  required
+                />
+              </div>
             </div>
 
             <br />
-            <div class="row g-5">
-              <div class="col-md-5">
+            <div
+              class="d-flex"
+              style="justify-content: space-around; flex-wrap: wrap"
+            >
+              <div class="col-6">
                 <label for="txtCity" class="form-label">City</label>
                 <input
                   type="text"
@@ -182,13 +251,13 @@
                   required
                 />
               </div>
-              <div class="col-md-5">
+              <div class="col-5">
                 <label for="txtState" class="form-label">State</label>
                 <select
                   id="txtState"
                   class="form-select boxes"
                   name="ntxtState"
-                  required  
+                  required
                 >
                   <option value="none">Choose...</option>
                   <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -224,63 +293,43 @@
               </div>
             </div>
 
-            <br />
-            <div class="row g-5">
-              <div class="col-md-5">
-                <label for="ppic" class="form-label">Profile Picture</label>
+            <br /><br />
+
+            <div class="d-flex" style="justify-content: space-evenly;">
+              <div >
                 <input
-                  type="file"
-                  id="ppic"
-                  name="nppic"
-                  class="form-control boxes"
-                  onchange="doShowPic(this,preview)"
-                  required
+                  class="form-check boxes"
+                  type="checkbox"
+                  id="terms"
+                  onchange="doEnable(this,sbtn,ubtn)"
+                  style="height: 20px; width: 20px"
                 />
+                <p style="color: #25293a; font-weight: bold">
+                  Terms and Conditions
+                </p>
               </div>
-              <div class="col-md-2">
-                <img
-                  src=""
-                  id="preview"
-                  height="150"
-                  width="100px"
-                  class="form-control boxes"
-                />
+
+              <div>
+                <button
+                  type="submit"
+                  class="btn myBtns"
+                  id="sbtn"
+                  style="margin-right: 20px"
+                  disabled
+                >
+                  Save
+                </button>
+                <button
+                  type="submit"
+                  class="btn myBtns"
+                  id="ubtn"
+                  formaction="/custProf-update"
+                  disabled
+                >
+                  Update
+                </button>
               </div>
             </div>
-
-            <br />
-            <div>
-              <input
-                class="form-check boxes"
-                type="checkbox"
-                id="terms"
-                onchange="doEnable(this,sbtn,ubtn)"
-                style="height: 20px; width: 20px"
-              />
-              <p style="color: #eff6e0">Terms and Conditions</p>
-            </div>
-
-            <br />
-            <center>
-              <button
-                type="submit"
-                class="btn myBtns"
-                id="sbtn"
-                style="margin-right: 20px"
-                disabled
-              >
-                Save
-              </button>
-              <button
-                type="submit"
-                class="btn myBtns"
-                id="ubtn"
-                formaction="/custProf-update"
-                disabled
-              >
-                Update
-              </button>
-            </center>
           </form>
         </div>
       </div>

@@ -30,6 +30,7 @@
         background-color: white;
         width: 100%;
         height: 100%;
+        overflow-x: hidden;
       }
       .ok {
         color: green;
@@ -47,12 +48,14 @@
       }
 
       .mybtn:hover {
-        background-color: #598392;
+        background-color: #855839;
         color: #eff6e0;
       }
 
       .mymodal {
-        background-color: #124559;
+        /* background-color: #124559; */
+        /* background-color: #222831; */
+        background-color: rgb(43, 42, 41);
         color: #f0ece5;
       }
 
@@ -65,7 +68,7 @@
         display: flex;
         justify-content: flex-end;
         flex-wrap: wrap;
-        padding: 10px;
+        padding: 10px; 
         padding-right: 30px;
         background-color: #222831;
         /* position: fixed; */
@@ -80,6 +83,7 @@
         /* margin-left: 5px;
         margin-right: 5px; */
         border: 0px;
+        /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
       }
 
       .card-body {
@@ -90,6 +94,52 @@
 
       .tcards {
         height: 200px;
+      }
+
+      #reachpic {
+        width: 40%;
+      }
+
+      #map {
+        width: 60%;
+      }
+
+      #pic-intro {
+        font-size: 30px;
+      }
+
+      #pichead, #pichead1 {
+        font-size: 40px;
+      }
+
+      @media(max-width:1150px) {
+        #reachpic,#map {
+          width: 100%;
+        }
+      }
+
+      @media(max-width:1100px) {
+        #pic-intro {
+          font-size: 25px;
+        }
+      }
+
+      @media(max-width:1100px) {
+        #pichead, #pichead1 {
+          font-size: 30px;
+        }
+      }
+
+      @media(max-width:830px) {
+        #pichead, #pichead1 {
+          font-size: 25px;
+        }
+      }
+
+      @media(max-width:533px) {
+        #pichead1 {
+          margin-top: -25px;
+        }
       }
     </style>
 
@@ -238,7 +288,7 @@
     <nav
       class="navbar navbar-expand-lg"
       style="
-       
+        
         background-color: rgb(43, 42, 41);
       "
       id="home"
@@ -348,45 +398,44 @@
       </button>
     </div> -->
 
-    <div class="d-flex" style="height: 450px; width: 1519px; justify-content: flex-start; align-items: center; flex-wrap: wrap; background-color: black;">
-      <img src="Images/bg.png">
-      <!-- <div class="col-md-6 d-flex" style="height: 650px; background-color: antiquewhite; align-items: center;">
-        <div class="col-md-12" style="height: 450px; background-color: #222831; color: white;">
-          gyyjgbjkbvhjkhuhjjjjjjjjjjjjjjjttttetrrjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-        </div>
-      </div>
-      <div class="col-md-6" style="height: 650px; background-color: blue;">
-        bkhdbvjdhbvdkkjnfvkjbdbvhkdfbvkdhjvbdkfjvhdvkj
-      </div> -->
-    </div>
-    <div class="d-flex" style="justify-content: center; background-color: #c3aa8b;" >
-      <div class="col-md-3 mb-2">
-        <div class="card" style="background-color: #c3aa8b; height: 300px;  border: 0px; border-radius: 0px;">
-          <center><h3 style="font-family: 'Times New Roman', Times, serif;">Customer</h3>
-          <i class="fa-solid fa-house" style="font-size: 60px;"></i></center>
+    <div class="d-flex" style="height: 44vw; width: 100vw; justify-content: flex-start; align-items: center; flex-wrap: wrap; background-color: black;">
+      <div style="flex-shrink: 3; background-image: url('Images/bgf2.png'); background-size: contain; background-repeat: no-repeat; height: 100%; width: 100%;">
 
-          <div class="card-body">
-            <center  style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Mechanic</center>
+      </div>
+    </div>
+    <div class="d-flex" style="justify-content: center; background-color: #a18167; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+      <div class="col-md-3 mb-2">
+        <div class="card" style="background-color: #a18167; height: 300px;  border: 0px; border-radius: 0px;">
+          <br>
+          <center><h3 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold; color: white;" id="pichead">Customer</h3>
+            <br>
+          <i class="fa-solid fa-house" style="font-size: 60px;"></i></center>
+          <div class="card-body text-light">
+            <center  style="font-family: 'Times New Roman', Times, serif; font-weight: lighter;" id="pic-intro">A job request created by the customer</center>
           </div>
         </div>
       </div>
       <div class="col-md-3 mb-2">
-        <div class="card" style="background-color: #c3aa8b; height: 300px; border: 0px; border-radius: 0px; ">
-          <center><h3 style="font-family: 'Times New Roman', Times, serif;">Me</h3>
+        <div class="card" style="background-color: #a18167; height: 300px; border: 0px; border-radius: 0px; ">
+          <br>
+          <center><h3 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold; color: white;" id="pichead">Us</h3><br>
           <i class="fa-solid fa-user" style="font-size: 60px;"></i></center>
 
-          <div class="card-body">
-            <center style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Mechanic</center>
+          <div class="card-body text-light">
+            <center style="font-family: 'Times New Roman', Times, serif; font-weight: lighter;" id="pic-intro">Is entertained by our sever and</center>
           </div>
         </div>
       </div>
       <div class="col-md-3 mb-2">
-        <div class="card" style="background-color: #c3aa8b; height: 300px; border: 0px; border-radius: 0px; ">
-          <center><h3 style="font-family: 'Times New Roman', Times, serif;">Provider</h3>
+        <div class="card" style="background-color: #a18167; height: 300px; border: 0px; border-radius: 0px; ">
+          <br>
+
+          <center><h3 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold; color: white;" id="pichead1">Service Provider</h3>
+            <br> 
           <i class="fa-solid fa-broom" style="font-size: 60px;"></i></center>
 
-          <div class="card-body">
-            <center style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Mechanic</center>
+          <div class="card-body text-light">
+            <center style="font-family: 'Times New Roman', Times, serif; font-weight: lighter;" id="pic-intro">Delivered to the service provider </center>
           </div>
         </div>
       </div>
@@ -403,12 +452,13 @@
         id="aboutus"
       >
         <div class="col-md-3 mb-2">
-          <div class="card scards" style="background-color: white; height: 570px; ">
+          <div class="card scards" style="background-color: white; height: 570px;">
             <img
               src="Images/mechanic.jpg"
               class="card-img-top"
               height="330px"
               alt="........"
+            
             />
 
             <div class="card-body">
@@ -422,7 +472,7 @@
         
 
         <div class="col-md-3 mb-2">
-          <div class="card scards" style="background-color: #ffffff; height: 570px;">
+          <div class="card scards" style="background-color: white; height: 570px;">
             <img
               src="Images/Plumber2.png"
               class="card-img-top"
@@ -439,7 +489,7 @@
         </div>
 
         <div class="col-md-3 mb-2">
-          <div class="card scards" style="background-color: #ffffff; height: 570px;">
+          <div class="card scards" style="background-color: white; height: 570px;">
             <img
               src="Images/gardener-woman-cartoon-with-overall-flowers-and-watering-can-design-vector.jpg"
               class="card-img-top"
@@ -461,7 +511,7 @@
         style="justify-content: space-around; flex-wrap: wrap"
       >
         <div class="col-md-3 mb-2">
-          <div class="card scards" style="background-color: #ffffff; height: 570px;">
+          <div class="card scards" style="background-color: white; height: 570px;">
             <img
               src="Images/Cleaning-Logos.jpg"
               class="card-img-top"
@@ -478,7 +528,7 @@
         </div>
 
         <div class="col-md-3 mb-2">
-          <div class="card scards" style="background-color: #ffffff; height: 570px;">
+          <div class="card scards" style="background-color: white; height: 570px;">
             <img
               src="Images/elec.jpg"
               class="card-img-top"
@@ -495,7 +545,7 @@
         </div>
 
         <div class="col-md-3 mb-2">
-          <div class="card scards" style="background-color: #ffffff; height: 570px;">
+          <div class="card scards" style="background-color: white; height: 570px;">
             <img
               src="Images/istockphoto-1081790264-612x612.jpg"
               class="card-img-top"
@@ -514,7 +564,7 @@
     </center>
 
     <!-- OurTeam -->
-    <div style="height: 100%; width: 100%; background-color: rgb(0, 0, 0)">
+    <div style="height: 100%; width: 100%; background-color: rgb(0, 0, 0); box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
       <div style="padding-top: 30px; height: 140px">
         <p
           style="
@@ -568,8 +618,8 @@
       </div>
     </div>
 
-    <div id="reachus">
-      <div class="d-flex flex-column" style="padding-top: 30px; height: 40%; width: 40%; float: left;">
+    <div class="d-flex" style="flex-wrap: wrap;" id="reachus">
+      <div class="d-flex flex-column" id="reachpic" style="padding-top: 30px; height: 40%; min-width: 450px;">
         <div class="d-flex" style="justify-content: center; align-items: baseline; width: 100%;"><img src="Images/arrow.png" height="300px" width="500px" ></div>
         <br>
         <div class="d-flex" style="justify-content: center; align-items: baseline; width: 100%;">
@@ -586,7 +636,7 @@
         </p>
       </div>
       </div>
-      <div style="float: right; width: 60%;">
+      <div id="map">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3428.3451028948!2d76.78419437537441!3d30.764892274568712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ff282845c404b%3A0xc0844bf7cbdcc6e9!2sPunjab%20Engineering%20College%20(PEC)!5e0!3m2!1sen!2sin!4v1709666392344!5m2!1sen!2sin"
           width="100%"

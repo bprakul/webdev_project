@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Service Providers</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+    <script>
+      var module = angular.module("myModule", []);
+      var controller = module.controller(
+        "myController",
+        function ($scope, $http) {
+          $scope.jsonCityAry = [];
+          $scope.jsonCategoryAry = [];
+
+          $scope.doFetchDistinctCity = function () {
+            let url = "/angular-fetch-distinct-city";
+            $http.get(url).then(success, error);
+            function success(response) {
+              $scope.jsonCityAry = response.data;
+            }
+
+            function error(response) {
+              alert(response.data);
+            }
+          };
+
+          $scope.doFetchDistinctCategory = function () {
+            let url = "/angular-fetch-distinct-category";
+            $http.get(url).then(success, error);
+            function success(response) {
+              $scope.jsonCategoryAry = response.data;
+            }
+
+            function error(response) {
+              alert(response.data);
+            }
+          };
+
+          $scope.doShowSel = function () {
+            //alert(JSON.stringify($scope.selPwd));
+            // alert($scope.selCity.location);
+            //let url="/angular-delete?emailkuch="+selemailid+"&pwd="+selemailid;
+            let url =
+              "/angular-fetch-one-record?location=" +
+              $scope.selCity.location +
+              "&category=" +
+              $scope.selCategory.category;
+            $http.get(url).then(success, errors);
+            function success(response) {
+              $scope.jsonRecordsAry = response.data;
+            }
+
+            function errors(response) {
+              alert(response.data);
+            }
+          };
+
+          $scope.doShowFull = function(email) {
+            let url = "/angular-fetch-full-det"
+          }
+        }
+      );
+    </script>
+  </head>
+  <body
+    ng-app="myModule"
+    ng-controller="myController"
+    ng-init="doFetchDistinctCity();doFetchDistinctCategory()"
+  >
+    <center><h1>Search Service Providers</h1></center>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          City:
+          <select
+            ng-options="obj.location for obj in jsonCityAry"
+            ng-model="selCity"
+          >
+            <option value="">Select</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          Category:
+          <select
+            ng-options="obj.category for obj in jsonCategoryAry"
+            ng-model="selCategory"
+          >
+            <option value="">Select</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <input type="button" value="Search Now" ng-click="doShowSel()" />
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4" ng-repeat="obj in jsonRecordsAry">
+          <div class="card" style="width: 20rem; height: 31rem">
+            <img
+              src="/Uploads/{{obj.proofpic}}"
+              class="card-img-top"
+              height="300px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{obj.name}}</h5>
+              <p class="card-text">
+                City: {{obj.location}}<br />
+                Category: {{obj.category}}<br />
+                Gender: {{obj.gender}}<br />
+              </p>
+              <input
+                type="button"
+                class="btn btn-primary"
+                value="View Full Details"
+                ng-click="doShowFull({{obj.email}})"
+                data-bs-toggle="modal"
+                data-bs-target="#viewDet"
+              />
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+
+    <div
+            id="viewDet"
+            class="modal fade"
+            tabindex="-1"
+            aria-labelledby="viewDetLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content mymodal">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="viewDetLabel">
+                    Full Details
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                    style="background-color: #f0ece5"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <center>
+                    <img
+                      src="/Uploads/{{obj.proofpic}}"
+                      height="100px"
+                      width="100px"
+                      alt=""
+                    /><br /><br />
+                  </center>
+
+                  Name: {{obj.name}}<br />
+                  Category: {{obj.category}}<br />
+                  City: {{obj.location}}<br />
+                  Gender: {{obj.gender}}<br />
+                  Firm: {{obj.firm}}<br />
+                  Website: {{obj.website}}<br />
+                  Contact: {{obj.contact}}<br />
+                  Email: {{obj.email}}<br />
+                  Since: {{obj.since}}<br />
+                  Other Information: {{obj.otherinfo}}<br />
+                </div>
+              </div>
+            </div>
+          </div>
+
+  </body>
+</html>
