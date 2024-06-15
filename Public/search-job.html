@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Service Providers</title>
+    <title>Jobs</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -25,6 +25,54 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
 
+    <style>
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        background-color: white;
+      }
+
+      #search {
+        width: 57vw;
+      }
+
+      #provpic {
+        width: 41vw;
+      }
+
+      .inSpan {
+        font-size: 23px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: bold;
+        color: #a85555;
+      }
+
+      .mymodal {
+        background-image: url(Images/jobbg.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      @media (max-width: 843px) {
+        #search {
+          width: 886px;
+          height: 600px;
+        }
+
+        #provpic {
+          width: 545px;
+          height: 600px;
+        }
+      }
+
+      @media (max-width: 1300px) {
+        #carddiv {
+          margin: 10px;
+        }
+      }
+    </style>
     <script>
       var module = angular.module("myModule", []);
       var controller = module.controller(
@@ -32,9 +80,10 @@
         function ($scope, $http) {
           $scope.jsonCityAry = [];
           $scope.jsonCategoryAry = [];
+          $scope.jsonRecordsAry = [];
 
           $scope.doFetchDistinctCity = function () {
-            let url = "/angular-fetch-distinct-city";
+            let url = "/angular-fetch-distinct-cityt";
             $http.get(url).then(success, error);
             function success(response) {
               $scope.jsonCityAry = response.data;
@@ -46,7 +95,7 @@
           };
 
           $scope.doFetchDistinctCategory = function () {
-            let url = "/angular-fetch-distinct-category";
+            let url = "/angular-fetch-distinct-categoryt";
             $http.get(url).then(success, error);
             function success(response) {
               $scope.jsonCategoryAry = response.data;
@@ -62,8 +111,8 @@
             // alert($scope.selCity.location);
             //let url="/angular-delete?emailkuch="+selemailid+"&pwd="+selemailid;
             let url =
-              "/angular-fetch-one-record?location=" +
-              $scope.selCity.location +
+              "/angular-fetch-one-recordt?city=" +
+              $scope.selCity.city +
               "&category=" +
               $scope.selCategory.category;
             $http.get(url).then(success, errors);
@@ -76,9 +125,21 @@
             }
           };
 
-          $scope.doShowFull = function(email) {
-            let url = "/angular-fetch-full-det"
-          }
+          $scope.doShowFull = function (emailid) {
+            // alert(emailid);
+            let url = "/angular-fetch-full-dett?mail=" + emailid;
+            $http.get(url).then(success, error);
+
+            function success(response) {
+              $scope.jsonFullArr = response.data;
+              // alert(JSON.stringify($scope.jsonFullArr));
+            }
+
+            function error(response) {
+              alert(response.data);
+            }
+
+          };
         }
       );
     </script>
@@ -88,110 +149,265 @@
     ng-controller="myController"
     ng-init="doFetchDistinctCity();doFetchDistinctCategory()"
   >
-    <center><h1>Search Service Providers</h1></center>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          City:
-          <select
-            ng-options="obj.location for obj in jsonCityAry"
-            ng-model="selCity"
-          >
-            <option value="">Select</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          Category:
-          <select
-            ng-options="obj.category for obj in jsonCategoryAry"
-            ng-model="selCategory"
-          >
-            <option value="">Select</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          <input type="button" value="Search Now" ng-click="doShowSel()" />
+    <nav
+      class="navbar navbar-expand-lg"
+      style="
+        background-color: white;
+        box-shadow: 4px 6px 3px 0 rgba(0, 0, 0, 0.075),
+          0 2px 0px 0 rgba(0, 0, 0, 0.147);
+      "
+      id="home"
+    >
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler bg-light"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="index.html"
+                style="color: black; font-family: cursive"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="provDash"
+                style="color: black; font-family: cursive"
+                >Dashboard</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="provProf"
+                style="color: black; font-family: cursive"
+                >Profile</a
+              >
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
-    <br /><br />
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4" ng-repeat="obj in jsonRecordsAry">
-          <div class="card" style="width: 20rem; height: 31rem">
-            <img
-              src="/Uploads/{{obj.proofpic}}"
-              class="card-img-top"
-              height="300px"
-            />
-            <div class="card-body">
-              <h5 class="card-title">{{obj.name}}</h5>
-              <p class="card-text">
-                City: {{obj.location}}<br />
-                Category: {{obj.category}}<br />
-                Gender: {{obj.gender}}<br />
-              </p>
-              <input
-                type="button"
-                class="btn btn-primary"
-                value="View Full Details"
-                ng-click="doShowFull({{obj.email}})"
-                data-bs-toggle="modal"
-                data-bs-target="#viewDet"
-              />
-            </div>
-          </div>
+    </nav>
 
-          
+    <!-- <center><h1>Search Jobs</h1></center> -->
+    <div class="d-flex outer" style="flex-wrap: wrap-reverse">
+      <div
+        class="d-flex"
+        id="search"
+        style="
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background-image: url(Images/jobbg.jpg);
+          background-repeat: no-repeat;
+          background-size: cover;
+        "
+      >
+        <span
+          style="
+            font-size: 80px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold',
+              sans-serif;
+          "
+          >Find Your Ideal <br />Job Here</span
+        >
+        <span
+          style="
+            font-size: 22px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+              sans-serif;
+            font-weight: bold;
+          "
+          >Finding jobs made easy, select the category, <br />your city and get
+          the available ones with just a click.</span
+        >
+        <br />
+        <div class="d-flex col-7" style="justify-content: space-around">
+          <div class="col-4">
+            <select
+              class="form-control"
+              ng-options="obj.city for obj in jsonCityAry"
+              ng-model="selCity"
+              style="border-radius: 0px; font-family: cursive"
+            >
+              <option value="">City</option>
+            </select>
+          </div>
+          <div class="col-4">
+            <select
+              class="form-control"
+              ng-options="obj.category for obj in jsonCategoryAry"
+              ng-model="selCategory"
+              style="border-radius: 0px; font-family: cursive"
+            >
+              <option value="">Category</option>
+            </select>
+          </div>
+          <div class="col-3">
+            <input
+              class="form-control"
+              type="button"
+              value="Search Now"
+              ng-click="doShowSel()"
+              style="
+                border-radius: 0px;
+                font-family: cursive;
+                color: white;
+                background-color: #a85555;
+              "
+            />
+          </div>
+        </div>
+        <br />
+      </div>
+      <div
+        class=""
+        style="
+          background-image: url('Images/cropped-Shaking-Hands.jpeg');
+          height: 620px;
+          background-size: cover;
+          background-repeat: no-repeat;
+        "
+        id="provpic"
+      ></div>
+    </div>
+
+    <div
+      class="d-flex"
+      style="
+        justify-content: left;
+        flex-wrap: wrap;
+        background-color: ghostwhite;
+      "
+    >
+      <div
+        class="col-lg-3 d-flex"
+        ng-repeat="obj in jsonRecordsAry"
+        style="justify-content: center; padding-top: 20px"
+        id="carddiv"
+      >
+        <div
+          class="card"
+          style="
+            width: 20rem;
+            height: 18rem;
+            border: none;
+            background-color: rgba(142, 142, 142, 0.215);
+            color: black;
+          "
+        >
+          <div class="card-body">
+            <p class="card-text" style="font-size: 20px; line-height: 30px">
+              <span
+                style="color: brown; font-weight: bold; font-family: cursive"
+                >Email:</span
+              >
+              {{obj.emailid}}<br />
+              <span
+                style="color: brown; font-weight: bold; font-family: cursive"
+                >Category: </span
+              >{{obj.category}}<br />
+              <span
+                style="color: brown; font-weight: bold; font-family: cursive"
+                >Address: </span
+              >{{obj.address}} <br />
+              <span
+                style="color: brown; font-weight: bold; font-family: cursive"
+                >City:</span
+              >
+              {{obj.city}}<br />
+              <span
+                style="color: brown; font-weight: bold; font-family: cursive"
+              >
+                Upto Date: </span
+              >{{obj.upto}} <br />
+              <span
+                style="color: brown; font-weight: bold; font-family: cursive"
+                >Task:</span
+              >
+              {{obj.task}}
+            </p>
+          </div>
+          <center>
+            <input
+              class="form-control"
+              type="button"
+              value="Full Details"
+              ng-click="doShowFull(obj.emailid)"
+              style="
+                border-radius: 0px;
+                font-family: cursive;
+                color: white;
+                background-color: #a85555;
+                margin-bottom: 10px;
+                width: 150px;
+              "
+              data-bs-toggle="modal"
+              data-bs-target="#viewDet"
+            />
+          </center>
         </div>
       </div>
     </div>
 
     <div
-            id="viewDet"
-            class="modal fade"
-            tabindex="-1"
-            aria-labelledby="viewDetLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content mymodal">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="viewDetLabel">
-                    Full Details
-                  </h1>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                    style="background-color: #f0ece5"
-                  ></button>
-                </div>
-                <div class="modal-body">
-                  <center>
-                    <img
-                      src="/Uploads/{{obj.proofpic}}"
-                      height="100px"
-                      width="100px"
-                      alt=""
-                    /><br /><br />
-                  </center>
-
-                  Name: {{obj.name}}<br />
-                  Category: {{obj.category}}<br />
-                  City: {{obj.location}}<br />
-                  Gender: {{obj.gender}}<br />
-                  Firm: {{obj.firm}}<br />
-                  Website: {{obj.website}}<br />
-                  Contact: {{obj.contact}}<br />
-                  Email: {{obj.email}}<br />
-                  Since: {{obj.since}}<br />
-                  Other Information: {{obj.otherinfo}}<br />
-                </div>
-              </div>
-            </div>
+      id="viewDet"
+      class="modal fade"
+      tabindex="-1"
+      aria-labelledby="viewDetLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content mymodal" ng-repeat="objj in jsonFullArr">
+          <div class="modal-header">
+            <h1 class="modal-title" id="viewDetLabel" style="font-size: 25px; font-weight: bold;">Full Details</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              style="background-color: #f0ece5"
+            ></button>
           </div>
+          <div class="modal-body" style="font-size: 20px;">
+            <center>
+              <img
+                src="Uploads/{{objj.profile}}"
+                height="250px"
+                width="300px"
+                sizes="contain"
+                style="border-radius: 45%;"
+                alt=""
+              /><br /><br />
+            </center>
 
+           <div style="line-height: 40px;">
+            <span class="inSpan">Name: </span>{{objj.name}}<br>
+            <span class="inSpan">Contact: </span>{{objj.contact}}<br>
+            <span class="inSpan">Email: </span>{{objj.email}}<br />
+            <span class="inSpan">Address: </span>{{objj.address}} <br>
+            <span class="inSpan">City: </span>{{objj.city}}<br>
+            <span class="inSpan">State: </span>{{objj.state}}
+          </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

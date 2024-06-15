@@ -109,7 +109,7 @@ app.post("/custProf-save", function(req,resp) {
 
     let filename;
     if (req.files == null) {
-        filename = "nopic.jpg";
+        filename = "user.png";
     }
 
     else {
@@ -121,7 +121,9 @@ app.post("/custProf-save", function(req,resp) {
 
     mysql.query("insert into customers value(?,?,?,?,?,?,?)",[email,name,num,add,city,state,filename], function(err) {
         if (err == null) {
-            resp.send("Profile Saved");
+            // resp.send("Profile Saved");
+            let filePath = process.cwd()+"/Public/profile-customer.html";
+            resp.sendFile(filePath);
         }
 
         else {
@@ -158,7 +160,9 @@ app.post("/custProf-update",function(req,resp) {
 
     mysql.query("update customers set name=?, contact=?, address=?, city=?, state=?, profile=? where email=?",[name,num,add,city,state,filename,email], function(err) {
         if (err == null) {
-            resp.send("Profile Updated");
+            // resp.send("Profile Updated");
+            let filePath = process.cwd()+"/Public/profile-customer.html";
+            resp.sendFile(filePath);
         }
 
         else {
@@ -271,15 +275,22 @@ app.post("/provProf-save", function(req,resp) {
     const spec = req.body.ntxtSpec;
 
     let filename;
-    filename = req.files.nppic.name;
-    let path = process.cwd()+"/Public/Uploads/"+filename;
-    req.files.nppic.mv(path);
+    if (req.files == null) {
+        filename = "user.png";
+    }
 
+    else {
+        filename = req.files.nppic.name;
+        let path = process.cwd()+"/Public/Uploads/"+filename;
+        req.files.nppic.mv(path);
+    }
     req.body.nppic = filename;
     
     mysql.query("insert into providers value(?,?,?,?,?,?,?,?,?,?,?)",[email,name,num,gen,work,firm,web,add,when,filename,spec], function(err) {
         if (err == null) {
-            resp.send("Profile Saved");
+            // resp.send("Profile Saved");
+            let filePath = process.cwd()+"/Public/profile-provider.html";
+            resp.sendFile(filePath);
         }
 
         else {
@@ -314,7 +325,9 @@ app.post("/provProf-update", function(req,resp) {
 
     mysql.query("update providers set name=?, contact=?, gender=?, category=?, firm=?, website=?, location=?, since=?, proofpic=?, otherinfo=? where email=?",[name,num,gen,type,firm,web,add,since,filename,info,email], function(err) {
         if (err == null) {
-            resp.send("Profile Updated");
+            // resp.send("Profile Updated");
+            let filePath = process.cwd()+"/Public/profile-provider.html";
+            resp.sendFile(filePath);
         }
 
         else {
@@ -331,6 +344,48 @@ app.get("/searchProv", function(req,resp) {
 
 app.get("/angular-fetch-distinct-city",function(req,resp) {
     mysql.query("select distinct location from providers",function(err,resJsonAry)
+    {
+        if (err == null) {
+            resp.send(resJsonAry);
+        }
+
+        else {
+            resp.send(err.message);
+        }
+    })
+})
+
+app.get("/angular-fetch-distinct-category",function(req,resp) {
+    mysql.query("select distinct category from providers",function(err,respJsonAry) {
+        resp.send(respJsonAry);
+    })
+})
+
+app.get("/angular-fetch-one-record",function(req,resp) {
+    mysql.query("select * from providers where location=? and category=?",[req.query.location,req.query.category],function(err,resultJsonAry){
+        resp.send(resultJsonAry);
+    })
+})
+
+app.get("/angular-fetch-full-det",function(req,resp) {
+    mysql.query("select * from providers where email=?",[req.query.mail],function(err,resultJsonAry){
+        if (err == null) {
+            resp.send(resultJsonAry);
+        }
+
+        else {
+            resp.send(err.message);
+        }
+    })
+})
+
+app.get("/searchJobs", function(req,resp) {
+    let filePath=process.cwd()+"/Public/search-job.html";
+    resp.sendFile(filePath);
+})
+
+app.get("/angular-fetch-distinct-cityt",function(req,resp) {
+    mysql.query("select distinct city from tasks",function(err,resJsonAry)
      {
         if (err == null) {
             resp.send(resJsonAry);
@@ -342,15 +397,27 @@ app.get("/angular-fetch-distinct-city",function(req,resp) {
     })
 })
 
-app.get("/angular-fetch-one-record",function(req,resp) {
-    mysql.query("select * from providers where location=? and category=?",[req.query.location,req.query.category],function(err,resultJsonAry){
+app.get("/angular-fetch-one-recordt",function(req,resp) {
+    mysql.query("select * from tasks where city=? and category=?",[req.query.city,req.query.category],function(err,resultJsonAry){
         resp.send(resultJsonAry);
     })
 })
 
-app.get("/angular-fetch-distinct-category",function(req,resp) {
-    mysql.query("select distinct category from providers",function(err,respJsonAry) {
+app.get("/angular-fetch-distinct-categoryt",function(req,resp) {
+    mysql.query("select distinct category from tasks",function(err,respJsonAry) {
         resp.send(respJsonAry);
+    })
+})
+
+app.get("/angular-fetch-full-dett",function(req,resp) {
+    mysql.query("select * from customers where email=?",[req.query.mail],function(err,resultJsonAry){
+        if (err == null) {
+            resp.send(resultJsonAry);
+        }
+
+        else {
+            resp.send(err.message);
+        }
     })
 })
 
@@ -405,13 +472,23 @@ app.get("/angular-resume",function(req,resp)
 
 app.get("/angular-fetch-distinct-pwds",function(req,resp){
     mysql.query("select distinct password from users",function(err,resultJsonAry){
+        if (err == null)
         resp.send(resultJsonAry);
+
+        else {
+            resp.send(err.message);
+        }
     })
 })
 
 app.get("/fetch-one-record",function(req,resp){
     mysql.query("select * from users where password=?",[req.query.pwd],function(err,resultJsonAry){
+        if (err == null)
         resp.send(resultJsonAry);
+
+        else {
+            resp.send(err.message);
+        }
     })
 })
 

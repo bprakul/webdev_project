@@ -147,7 +147,9 @@
       $(document).ready(function () {
         $("#txtEmail").keyup(function () {
           let mail = $("#txtEmail").val();
-          var r = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+          // var r = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+          var r = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+          // var r = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
           if (r.test(mail) == false) {
             $("#errMail")
@@ -234,7 +236,8 @@
             alert("Please Fill All The Values");
           } else if (
             $("#errMail").html() == "(Invalid)" ||
-            $("#errPass").html() == "(Invalid)"
+            $("#errPass").html() == "(Invalid)" ||
+            $("#mailAvail").html() == "Not Available"
           ) {
             alert("Please Enter Valid Values");
           } else {
@@ -346,58 +349,6 @@
       </div>
     </nav>
 
-    <!-- carousel -->
-    <!-- <div
-      id="carouselExampleAutoplaying"
-      class="carousel slide"
-      data-bs-ride="carousel"
-    >
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img
-            src="Images/Carousel2.jpg"
-            class="d-block w-100"
-            height="650px"
-            alt="..."
-          />
-        </div>
-        <div class="carousel-item active">
-          <img
-            src="Images/cleaning.jpg"
-            class="d-block w-100"
-            height="650px"
-            alt="..."
-          />
-        </div>
-        <div class="carousel-item active">
-          <img
-            src="Images/carouselhome.webp"
-            class="d-block w-100"
-            height="650px"
-            alt="..."
-          />
-        </div>
-      </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleAutoplaying"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleAutoplaying"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div> -->
-
     <div class="d-flex" style="height: 44vw; width: 100vw; justify-content: flex-start; align-items: center; flex-wrap: wrap; background-color: black;">
       <div style="flex-shrink: 3; background-image: url('Images/bgf2.png'); background-size: contain; background-repeat: no-repeat; height: 100%; width: 100%;">
 
@@ -422,7 +373,7 @@
           <i class="fa-solid fa-user" style="font-size: 60px;"></i></center>
 
           <div class="card-body text-light">
-            <center style="font-family: 'Times New Roman', Times, serif; font-weight: lighter;" id="pic-intro">Is entertained by our sever and</center>
+            <center style="font-family: 'Times New Roman', Times, serif; font-weight: lighter;" id="pic-intro">Is entertained by our server and</center>
           </div>
         </div>
       </div>
@@ -610,12 +561,15 @@
               <h3 class="card-title" style="color: white;">Under the Guidance of:</h3>
               <div class="card-body" style="color: white;">
                 Name: Mr. Rajesh Bansal<br>
-                Institute: Banglore Computer Edu.
+                Institute: Banglore Computer Edu.,<br>
+                Bathinda
+
               </div>
             </center>
           </div>
         </div>
       </div>
+      <br>
     </div>
 
     <div class="d-flex" style="flex-wrap: wrap;" id="reachus">

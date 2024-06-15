@@ -77,6 +77,18 @@
         background-color: #f0ece5;
         color: #161a30;
       }
+
+      label {
+        font-size: 18px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: bold;
+        color: #d9d1b4;
+      }
+
+      input
+      {
+        background-color: rgba(245, 222, 179, 0.53);
+      }
     </style>
     <script>
       $(document).ready(function () {
@@ -194,7 +206,6 @@
     <nav
       class="navbar navbar-expand-lg"
       style="
-       
         background-color: rgb(43, 42, 41);
       "
       id="home"
@@ -209,7 +220,7 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -236,7 +247,7 @@
 
     <div class="container">
       <div class="d-flex" style="justify-content: center; flex-wrap: wrap;">
-        <div class="col-md-4 mt-3">
+        <div class="col-md-4 mt-4">
           <div class="card" style="width: 20rem; height: 330px;">            
             <div class="d-flex" style="justify-content: center; padding-top: 20px;">
               <i class="fa-solid fa-user" style="font-size: 200px; color: black;"></i>
@@ -250,7 +261,7 @@
           </div>
         </div>
 
-        <div class="col-md-4 mt-3">
+        <div class="col-md-4 mt-4">
           <div class="card" style="width: 20rem; height: 330px;">
             <div class="d-flex" style="justify-content: center; padding-top: 20px;">
               <i class="fa-solid fa-helmet-safety" style="color: black; font-size: 200px;"></i>
@@ -269,7 +280,7 @@
           </div>
         </div>
 
-        <div class="col-md-4 mt-3">
+        <div class="col-md-4 mt-4">
           <div class="card" style="width: 20rem; height: 330px;">
             <div class="d-flex" style="justify-content: center; padding-top: 20px;">
               <i class="fa-solid fa-business-time" style="font-size: 200px; color: black;"></i>
@@ -284,7 +295,7 @@
       </div>
 
       <div class="d-flex" style="justify-content: center; flex-wrap: wrap;">
-        <div class="col-md-4 mt-5">
+        <div class="col-md-4 mt-4">
           <div class="card" style="width: 20rem; height: 330px;">
             <div class="d-flex" style="justify-content: center; padding-top: 20px;">
               <i class="fa-solid fa-magnifying-glass" style="color: black; font-size: 200px;"></i>
@@ -298,7 +309,7 @@
           </div>
         </div>
 
-        <div class="col-md-4 mt-5">
+        <div class="col-md-4 mt-4">
           <div class="card" style="width: 20rem; height: 330px;" id="settings">
             <div class="d-flex" style="justify-content: center; padding-top: 20px;">
               <i class="fa-solid fa-gear" style="color: black; font-size: 200px;" id="seticon"></i>
@@ -326,10 +337,10 @@
       aria-labelledby="postRLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content mymodal">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="postRLabel">Post Requirements</h1>
+            <h1 class="modal-title fs-5" id="postRLabel" style="font-size: 40px;">Post Requirements</h1>
             <button
               type="button"
               class="btn-close"
@@ -347,15 +358,17 @@
                   id="txtEmail"
                   name="ntxtEmail"
                   class="form-control"
+                  style="background-color: rgba(255, 255, 255, 0.444); color: white;"
                 />
               </div>
+              <hr>
               <div>
                 <label for="txtReq" class="form-label">Type of Work</label>
-                <select id="txtReq" name="ntxtReq" class="form-control">
+                <select id="txtReq" name="ntxtReq" class="form-control" style="background-color: rgba(255, 255, 255, 0.444); color: white; background: rgba(0, 0, 0, 0.444);">
                   <option value="none">Choose...</option>
                   <option value="Plumber">Plumber</option>
                   <option value="Electrician">Electrician</option>
-                  <option value="Carpenter">Carpenter</option>
+                  <option value="Carpenter">Carpenter</option>  
                   <option value="Mechanic">Mechanic</option>
                   <option value="Interior">Interior</option>
                   <option value="Gardener">Gardener</option>
@@ -364,13 +377,14 @@
                   <option value="Maid">Maid</option>
                 </select>
               </div>
+              <hr>
               <div class="locationl">
                 <label for="locHome">Home</label>
                 <label for="locOther">Other Location</label>
               </div>
               <div class="location">
-                <input type="radio" name="nlocWork" id="locHome" />
-                <input type="radio" name="nlocWork" id="locOther" />
+                <input type="radio" name="nlocWork" id="locHome" style="background-color: rgba(255, 255, 255, 0.444); color: white;"/>
+                <input type="radio" name="nlocWork" id="locOther" style="background-color: rgba(255, 255, 255, 0.444); color: white;"/>
               </div>
               <div>
                 <label for="txtAdd" class="form-label">Address</label>
@@ -379,8 +393,10 @@
                   name="ntxtAdd"
                   id="txtAdd"
                   class="form-control"
+                  style="background-color: rgba(255, 255, 255, 0.444); color: white;"
                 />
               </div>
+              <hr>
               <div>
                 <label for="txtCity" class="form-label">City</label>
                 <input
@@ -388,8 +404,10 @@
                   name="ntxtCity"
                   id="txtCity"
                   class="form-control"
+                  style="background-color: rgba(255, 255, 255, 0.444); color: white;"
                 />
               </div>
+              <hr>
               <div>
                 <label for="txtDate" class="form-label">Up To</label>
                 <input
@@ -397,8 +415,10 @@
                   name="ntxtDate"
                   id="txtDate"
                   class="form-control"
+                  style="background-color: rgba(255, 255, 255, 0.444); color: white;"
                 />
               </div>
+              <hr>
               <div>
                 <label for="txtTask" class="form-label">Task</label>
                 <textarea
@@ -406,9 +426,11 @@
                   id="txtTask"
                   class="form-control"
                   rows="4"
+                  style="background-color: rgba(255, 255, 255, 0.444); color: white;"
                 >
                 </textarea>
               </div>
+              <hr>
             </form>
           </div>
           <div class="modal-footer">
@@ -516,6 +538,6 @@
         </div>
       </div>
     </div>
-
+    <br><br>
   </body>
 </html>

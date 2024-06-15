@@ -25,6 +25,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
     <style>
+      body,
+      html {
+        background-image: url(Images/usersbg.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
       .myBtns {
         background-color: #eff6e0;
         color: #01161e;
@@ -43,7 +49,7 @@
         function ($scope, $http) {
           $scope.jsonRecordArray = [];
           $scope.selObj;
-          
+
           $scope.doShow = function () {
             let url = "/angular-show-all";
             $http.get(url).then(success, error);
@@ -120,56 +126,132 @@
       );
     </script>
   </head>
-  <body ng-app="myModule" ng-controller="myController" ng-init="doShow();doFetchDistinctPasswords()">
+  <body
+    ng-app="myModule"
+    ng-controller="myController"
+    ng-init="doShow();doFetchDistinctPasswords()"
+  >
+    <nav
+      class="navbar navbar-expand-lg"
+      style="
+        background-color: rgba(255, 255, 255, 0.073);
+        box-shadow: 4px 6px 3px 0 rgba(0, 0, 0, 0.075),
+          0 2px 0px 0 rgba(0, 0, 0, 0.147);
+      "
+      id="home"
+    >
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler bg-light"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="index.html"
+                style="color: black; font-family: cursive"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="adminDash"
+                style="color: black; font-family: cursive"
+                >Dashboard</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <center><h1>All Records</h1></center>
 
     <div class="container">
-      <table class="table table-hover" border="2" rules="all">
-        <thead>
-          <tr>
-            <th scope="col">Serial NO.</th>
-            <th scope="col">Email ID</th>
-            <th scope="col">Password</th>
-            <th scope="col">User Type</th>
-            <th scope="col">Date of Signup</th>
-            <th scope="col">Status</th>
-            <th scope="col">Activity</th>
-          </tr>
-        </thead>
+      <h3>Filter Passwords:</h3>
+      <select
+        ng-options="obj.password for obj in jsonPasswordsAry"
+        ng-model="selPwd"
+        ng-change="doShowSelPwd();"
+        class="form-control"
+        style="width: 200px"
+      >
+        <option value="">Select</option>
+      </select>
+      <br />
+      <table class="table table-hover table-light" border="0">
+        <tr style="height: 60px; vertical-align: middle">
+          <th scope="col" style="background-color: rgba(50, 50, 53, 0.205)">
+            Serial No.
+          </th>
+          <th scope="col" style="background-color: rgba(50, 50, 53, 0.205)">
+            Email ID
+          </th>
+          <th scope="col" style="background-color: rgba(50, 50, 53, 0.205)">
+            Password
+          </th>
+          <th scope="col" style="background-color: rgba(50, 50, 53, 0.205)">
+            User Type
+          </th>
+          <th scope="col" style="background-color: rgba(50, 50, 53, 0.205)">
+            Date of Signup
+          </th>
+          <th scope="col" style="background-color: rgba(50, 50, 53, 0.205)">
+            Status
+          </th>
+          <th scope="col" style="background-color: rgba(50, 50, 53, 0.205)">
+            Activity
+          </th>
+        </tr>
         <tbody>
           <tr ng-repeat="obj in jsonRecordArray">
-            <th scope="row">{{$index+1}}</th>
-            <td>{{obj.emailid}}</td>
-            <td>{{obj.password}}</td>
-            <td>{{obj.utype}}</td>
-            <td>{{obj.dos}}</td>
-            <td>{{obj.status}}</td>
-            <td>
+            <th scope="row" style="background-color: rgba(50, 50, 53, 0.205)">
+              {{$index+1}}
+            </th>
+            <td style="background-color: rgba(50, 50, 53, 0.205)">
+              {{obj.emailid}}
+            </td>
+            <td style="background-color: rgba(50, 50, 53, 0.205)">
+              {{obj.password}}
+            </td>
+            <td style="background-color: rgba(50, 50, 53, 0.205)">
+              {{obj.utype}}
+            </td>
+            <td style="background-color: rgba(50, 50, 53, 0.205)">
+              {{obj.dos}}
+            </td>
+            <td style="background-color: rgba(50, 50, 53, 0.205)">
+              {{obj.status}}
+            </td>
+            <td style="background-color: rgba(50, 50, 53, 0.205)">
               <input
                 type="button"
                 value="Block"
                 ng-click="doBlock(obj.emailid)"
+                class="btn btn-danger"
               />
               <input
                 type="button"
                 value="Resume"
                 ng-click="doResume(obj.emailid)"
+                class="btn btn-success"
               />
             </td>
           </tr>
         </tbody>
       </table>
-
-      <center>
-        <h4>All Passwords:</h4>
-        <select
-          ng-options="obj.password for obj in jsonPasswordsAry"
-          ng-model="selPwd"
-          ng-change="doShowSelPwd();"
-        >
-          <option value="">Select</option>
-        </select>
-      </center>
     </div>
   </body>
 </html>
