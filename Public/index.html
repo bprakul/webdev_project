@@ -271,7 +271,10 @@
 
           $.ajax(obj)
             .done(function (resp) {
-              if (resp == "Customer") {
+              if(resp == 'Admin') {
+                window.location = "/adminDash"
+              }
+              else if (resp == "Customer") {
                 window.location = "/custDash";
               } else {
                 window.location = "/provDash";
