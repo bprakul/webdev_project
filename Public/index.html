@@ -96,6 +96,16 @@
         height: 200px;
       }
 
+      .s1btn {
+        background-color: #f2811b;
+        color: white;
+      }
+
+      .s2btn {
+        background-color: #04a8f0;
+        color: white;
+      }
+
       #reachpic {
         width: 40%;
       }
@@ -311,7 +321,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
+        <div style="height: 45px; width: 100px; background-image: url(Images/logo-ace.png); background-repeat: no-repeat; background-size: contain;"></div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -333,20 +343,20 @@
 
           <div class="gap-2 d-md-flex justify-content-md-end">
             <input
-              class="btn mybtn me-md-2"
-              type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#modalSignup"
-              value="SignUp"
-            />
-            <input
-              class="btn mybtn"
+              class="btn mybtn me-md-2 s2btn"
               type="button"
               value="Login"
               class="mybtn"
               data-bs-toggle="modal"
               data-bs-target="#modalLogin"
             />
+            <input
+              class="btn mybtn s1btn"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#modalSignup"
+              value="SignUp"
+            />  
           </div>
         </div>
       </div>
